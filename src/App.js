@@ -1,54 +1,26 @@
 
+/* eslint-disable jsx-a11y/alt-text */
+
+import Card from './components/Card'
+import Header from './components/Header'
+import Drawer from './components/Drawer';
+
+const arr = [
+  {name:'Кроссовки Titan', price:'8 990 ₽', img: './img/sneakers/1.jpg'},
+  {name:'Кроссовки Winner SL', price:'9 990 ₽',  img: './img/sneakers/2.jpg'},
+  {name:'Кроссовки Titan', price:'8 990 ₽',  img: './img/sneakers/3.jpg'},
+  {name:'Кроссовки Nike Air Max Terrascape 90', price:'14 990 ₽',  img: './img/sneakers/4.jpg'}
+
+];
+
+
+
 function App() {
   return (
     <div className="wrapper">
-      <div style= {{display: 'none'}} className="drawer-overlay">
-        <div  className="drawer">
-        <h2>Корзина
-        <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg"></img>
-        </h2>
-
-        <div className="items-sneak">
-        <div className="card-item">
-        <img width={100} height={110} src="./img/sneakers/1.jpg"></img>
-        <div>
-        <p>Кроссовки Winner SL</p>
-        <b>9 990 ₽</b>
-        </div>
-        <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg"></img>
-        </div>
-        <div className="card-item">
-        <img width={100} height={110} src="./img/sneakers/1.jpg"></img>
-        <div>
-        <p>Кроссовки Winner SL</p>
-        <b>9 990 ₽</b>
-        </div>
-        <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg"></img>
-        </div>
-        </div>
-        <div className="price-and-tax">
-      <ul className="price-ul">
-        <li>
-          <p>Итого</p>
-          <div></div>
-          <b>21 498</b>
-        </li>
-
-        <li>
-          <p>Налог 3%</p>
-          <div></div>
-          <b>645</b>
-        </li>
-      </ul>
-    </div>
-    <button>Оформить заказ
-      {/* <img width={30} height={20} src="./img/arrow.svg"></img> */}
-    </button>
-    </div>
-    
-        
-      </div>
-      <header>
+     <Drawer/>
+      <Header/>
+      {/* <header>
         <div  className="header-left">
           <img width={40} height={40} src="./img/sneaker-logo.png"/>
           <div className="header-left-info">
@@ -65,7 +37,7 @@ function App() {
               <img width={30} height={20} src="./img/user.svg"></img>
             </li>
           </ul> 
-      </header>
+      </header> */}
 
       <div className="content">
         <div  className="title-serch">
@@ -78,8 +50,15 @@ function App() {
         </div>
         
         <div className="sneakers-list">
-          <Card/>
-        <div className="card">
+          {arr.map((obj)=>(
+            <Card 
+            name={obj.name} 
+            price ={obj.price} 
+            img= {obj.img}
+            clickBtn = {()=>console.log(obj)}
+            />
+          ))}
+        {/* <div className="card">
           <img width={30} height={20} src="./img/heart-push.svg" alt="Unliked"></img>
             <img width={150} height={150} src="./img/sneakers/1.jpg"></img>
             <h5>Кроссовки Winner SL</h5>
@@ -129,7 +108,7 @@ function App() {
                 <img width={30} height={20} src="./img/plus.svg"></img>
               </button>
             </div>
-        </div>
+        </div> */}
 
         </div>
     </div>
