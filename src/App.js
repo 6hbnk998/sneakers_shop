@@ -1,25 +1,39 @@
 
-/* eslint-disable jsx-a11y/alt-text */
-
 import Card from './components/Card'
 import Header from './components/Header'
 import Drawer from './components/Drawer';
+import React from 'react';
 
-const arr = [
-  {name:'Кроссовки Titan', price:'8 990 ₽', img: './img/sneakers/1.jpg'},
-  {name:'Кроссовки Winner SL', price:'9 990 ₽',  img: './img/sneakers/2.jpg'},
-  {name:'Кроссовки Titan', price:'8 990 ₽',  img: './img/sneakers/3.jpg'},
-  {name:'Кроссовки Nike Air Max Terrascape 90', price:'14 990 ₽',  img: './img/sneakers/4.jpg'}
+// const arr = [
+//   {name:'Кроссовки Titan', price:'8 990 ₽', img: './img/sneakers/1.jpg'},
+//   {name:'Кроссовки Winner SL', price:'9 990 ₽',  img: './img/sneakers/2.jpg'},
+//   {name:'Кроссовки Titan', price:'8 990 ₽',  img: './img/sneakers/3.jpg'},
+//   {name:'Кроссовки Nike Air Max Terrascape 90', price:'14 990 ₽',  img: './img/sneakers/4.jpg'}
 
-];
+// ];
 
 
 
 function App() {
+  const [items, setItems] = React.useState([])
+  const [cardShow, setCardShow] = React.useState(false)
+   React.useEffect(()=>{
+    fetch('https://64219ad186992901b2b7c0db.mockapi.io/items')
+    .then((res)=>{
+      return res.json();
+    })
+    .then((json)=>{
+      setItems(json);
+    });
+  },[]);
+
+
+
+
   return (
     <div className="wrapper">
-     <Drawer/>
-      <Header/>
+     {cardShow ? <Drawer cardClose={()=> setCardShow(false)}/> : null}
+      <Header onClickCard ={()=> setCardShow(true)} />
       {/* <header>
         <div  className="header-left">
           <img width={40} height={40} src="./img/sneaker-logo.png"/>
@@ -50,12 +64,12 @@ function App() {
         </div>
         
         <div className="sneakers-list">
-          {arr.map((obj)=>(
+          {items.map((obj)=>(
             <Card 
             name={obj.name} 
             price ={obj.price} 
             img= {obj.img}
-            clickBtn = {()=>console.log(obj)}
+            onClickAdd = {()=>console.log('Вы нажали на плюс')}
             />
           ))}
         {/* <div className="card">
@@ -117,3 +131,4 @@ function App() {
 }
 
 export default App;
+
