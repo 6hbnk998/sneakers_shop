@@ -1,29 +1,25 @@
 
-function Drawer(props){
+function Drawer({onClose, items = []}){
     return(
         <div  className="drawer-overlay">
         <div  className="drawer">
         <h2>Корзина
-        <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg" onClick={props.cardClose} alt=""></img>
+        <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg" onClick={onClose} alt=""></img>
         </h2>
 
         <div className="items-sneak">
-        <div className="card-item">
-        <img width={100} height={110} src="./img/sneakers/1.jpg" alt=""></img>
-        <div>
-        <p>Кроссовки Winner SL</p>
-        <b>9 990 ₽</b>
-        </div>
-        <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg" alt=""></img>
-        </div>
-        <div className="card-item">
-        <img width={100} height={110} src="./img/sneakers/1.jpg" alt=""></img>
-        <div>
-        <p>Кроссовки Winner SL</p>
-        <b>9 990 ₽</b>
-        </div>
-        <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg" alt=""></img>
-        </div>
+          {items.map((obj)=>(
+            <><div className="card-item">
+              <img width={100} height={110} src={obj.img} alt=""></img>
+              <div>
+                <p>{obj.name}</p>
+                <b>{obj.price}₽</b>
+              </div>
+              <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg" alt=""></img>
+            </div>
+            </>
+          ))}
+
         </div>
         <div className="price-and-tax">
       <ul className="price-ul">
