@@ -14,25 +14,14 @@ import React from 'react';
 
 
 
-function App() {
-  const [items, setItems] = React.useState([])
-  const [cardShow, setCardShow] = React.useState(false)
-   React.useEffect(()=>{
-    fetch('https://64219ad186992901b2b7c0db.mockapi.io/items')
-    .then((res)=>{
-      return res.json();
-    })
-    .then((json)=>{
-      setItems(json);
-    });
-  },[]);
-
-
+const onAddToCard = () =>{
+    console.log(123)
+  }
 
 
   return (
     <div className="wrapper">
-     {cardShow ? <Drawer cardClose={()=> setCardShow(false)}/> : null}
+     {cardShow ? <Drawer items={cardIitems} onClose={()=> setCardShow(false)}/> : null}
       <Header onClickCard ={()=> setCardShow(true)} />
       {/* <header>
         <div  className="header-left">
@@ -64,12 +53,13 @@ function App() {
         </div>
         
         <div className="sneakers-list">
-          {items.map((obj)=>(
+          {items.map((item)=>(
             <Card 
-            name={obj.name} 
-            price ={obj.price} 
-            img= {obj.img}
+            name={item.name} 
+            price ={item.price} 
+            img= {item.img}
             onClickAdd = {()=>console.log('Вы нажали на плюс')}
+            onPlus = {(obj)=>console.log(obj)}
             />
           ))}
         {/* <div className="card">
@@ -131,4 +121,5 @@ function App() {
 }
 
 export default App;
+
 
