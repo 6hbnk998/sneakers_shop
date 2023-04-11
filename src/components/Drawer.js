@@ -1,6 +1,13 @@
 
-function Drawer({onClickDelete,onClose, items = []}){
+import React from 'react';
 
+function Drawer({onClose, items = []}){
+  
+  const [visibleItem, setVisibleItem] = React.useState(true)
+
+  const toggleVisibleItem = () =>{
+    setVisibleItem(false)
+  }
  
     return(
         <div  className="drawer-overlay">
@@ -9,7 +16,7 @@ function Drawer({onClickDelete,onClose, items = []}){
         <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg" onClick={onClose} alt=""></img>
         </h2>
 
-        <div className="items-sneak">
+        {visibleItem && <div className="items-sneak">
           {items.map((obj)=>(
             <><div className="card-item">
               <img width={100} height={110} src={obj.img} alt=""></img>
@@ -17,12 +24,12 @@ function Drawer({onClickDelete,onClose, items = []}){
                 <p>{obj.name}</p>
                 <b>{obj.price}₽</b>
               </div>
-              <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg" onClick = {onClickDelete} alt=""></img>
+              <img className="remove-item-btn" width={30} height={20} src="./img/plus.svg" onClick = {toggleVisibleItem} alt=""></img>
             </div>
             </>
           ))}
 
-        </div>
+        </div>}
         <div className="price-and-tax">
       <ul className="price-ul">
         <li>
